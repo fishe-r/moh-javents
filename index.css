@@ -1,0 +1,126 @@
+/* Manh Truong Nguyen, 000893836 */
+/* Feb 17, 2023 */
+
+.custom--screen-border {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: solid 10px white;
+  pointer-events: none;
+}
+
+.custom--progress-bar-1,
+.custom--progress-bar-2,
+.custom--progress-bar-3,
+.custom--progress-bar-4 {
+  position: fixed;
+}
+
+.transition {
+  transition: background 0.5s, width 0.11s, height 0.11s;
+}
+
+.custom--progress-bar-1 {
+  height: 10px;
+  top: 0;
+  left: 0;
+}
+
+.custom--progress-bar-2 {
+  width: 10px;
+  top: calc(-100vw);
+  right: 0;
+}
+
+.custom--progress-bar-3 {
+  height: 10px;
+  bottom: 0;
+  right: calc(-100vw - 100vh);
+}
+
+.custom--progress-bar-4 {
+  width: 10px;
+  bottom: calc(-2 * 100vw - 100vh);
+  left: 0;
+}
+
+.custom--main {
+  margin-top: 7rem;
+  margin-bottom: 7rem;
+}
+
+.custom--img {
+  cursor: pointer;
+}
+
+.custom--img-animation-primary {
+  animation: animation-primary 1s 1 ease-out;
+}
+
+.custom--img-animation-secondary {
+  animation: animation-secondary 1s 1 ease-out;
+}
+
+@media screen and (min-width: 576px) {
+  .custom--img {
+    width: 300px;
+  }
+
+  .custom--counter {
+    min-width: 32ch;
+  }
+
+  .custom--timer {
+    min-width: 34ch;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .custom--button-randomize {
+    width: 100%;
+  }
+
+  .custom--timer {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .custom--counter {
+    text-align: center !important;
+    white-space: nowrap;
+  }
+
+  .custom--copyright {
+    text-align: center !important;
+  }
+}
+
+@keyframes animation-secondary {
+  0% {
+    opacity: 0.5;
+    transform: scaleX(1) rotateY(0deg);
+  }
+  50% {
+    opacity: 0;
+    transform: scaleX(0) rotateY(500deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1) rotateY(0deg);
+  }
+}
+
+@keyframes animation-primary {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(0) rotate(360deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
