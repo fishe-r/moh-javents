@@ -185,15 +185,12 @@ window.onload = () => {
       html_img.onclick = () => {
         const animation_duration = 1000
         const class_names = ['primary', 'secondary']
-        setTimeout(
-          () =>
-            (states = handle_changing_image(
-              IMAGES,
-              states,
-              html_img,
-              states.current_keys[index],
-              index
-            )),
+        states = handle_changing_image(
+          IMAGES,
+          states,
+          html_img,
+          states.current_keys[index],
+          index,
           animation_duration / 2
         )
         states = reset_cycle(states)
@@ -504,6 +501,7 @@ const change_html_timer_background = (cycle, max_cycle, html_timer) => {
  * @param {HTMLImageElement} html_tag The html tag that will contain the image
  * @param {string} current_key The key of currently displaying image
  * @param {index} index The index of category
+ * @param {number} delay_attaching Delay attaching to html node in a number of milliseconds
  * @returns {States} The next states
  */
 const handle_changing_image = (
@@ -511,14 +509,15 @@ const handle_changing_image = (
   states,
   html_tag,
   current_key,
-  index
+  index,
+  delay_attaching = 0
 ) => {
   const category = get_object_keys(images)[index]
   const { src, alt, key } = choose_random_image(images, category, current_key)
   const { count } = increment_count(states, 1)
   const { current_keys } = store_current_key(states, key, index)
 
-  attach_image(html_tag, src, alt)
+  setTimeout(() => attach_image(html_tag, src, alt), delay_attaching)
 
   return { ...states, count, current_keys }
 }
@@ -531,15 +530,21 @@ const handle_changing_image = (
  * @param {States} states The current states
  * @param {Array.<HTMLImageElement>} html_tags The html tags that will contain images
  * @param {number} increment_amount The amount to increment count state
+ * @param {number} delay_attaching Delay attaching to html node in a number of milliseconds
  * @returns {States} The next states
  */
 const handle_changing_images = (
   images,
   states,
   html_tags,
-  increment_amount
+  increment_amount,
+  delay_attaching = 0
 ) => {
-  const next_images = choose_random_images(images, states.current_keys)
+  const next_images = choose_random_images(
+    images,
+    states.current_keys,
+    delay_attaching
+  )
   const next_keys = next_images.map(({ key }) => key)
   const { count } = increment_count(states, increment_amount)
   const { current_keys } = store_current_keys(states, next_keys)
